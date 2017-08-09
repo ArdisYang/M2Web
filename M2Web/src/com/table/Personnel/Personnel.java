@@ -17,7 +17,7 @@ public class Personnel {
 	private String account;// 帳號
 	private String name;
 	private String password;
-	private int PositionTypeid;// 職務PositionTypeid
+//	private int PositionTypeid;// 職務PositionTypeid
 	public String strPosition;
 	private int[] permissions;// 權限   如: 剛創建=0 最低  一般員工=1~3  會計(帳務操作)4   出納5
 	private String nationality;// 國籍
@@ -70,13 +70,13 @@ public class Personnel {
 		this.password = password;
 	}
 
-	public int getPositionTypeid() {
-		return PositionTypeid;
-	}
-
-	public void setPositionTypeid(int positionTypeid) {
-		PositionTypeid = positionTypeid;
-	}
+//	public int getPositionTypeid() {
+//		return PositionTypeid;
+//	}
+//
+//	public void setPositionTypeid(int positionTypeid) {
+//		PositionTypeid = positionTypeid;
+//	}
 
 	public int[] getPermissions() {
 		return permissions;

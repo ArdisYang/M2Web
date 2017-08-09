@@ -1,0 +1,84 @@
+package com.table.Account;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
+
+import com.Hibernate.HibernateUtil;
+
+public class AccountDAO extends HibernateUtil<Account> {
+
+	// public String login(Account loginAccount) {
+	// Session sess = null;
+	// String account = "";
+	// try {
+	// sess = HibernateUtil.getSessionFactory().openSession();
+	// Criteria criteria = sess.createCriteria(loginAccount.getClass());
+	// Iterator iterator = criteria.list().iterator();
+	// while (iterator.hasNext()) {
+	// // arraylist.add((T) iterator.next());
+	// }
+	// } catch (HibernateException e) {
+	// throw new RuntimeException(e);
+	// } finally {
+	// sess.close();
+	// }
+	// return account;
+	// }
+
+	public String login(String loginAccount, String password) {
+		Session session = null;
+		String msg = "";
+		Account checkAccount = new Account();
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			Criteria criteria = session.createCriteria(Account.class);
+			if (loginAccount != null && !loginAccount.equals("")) {
+				criteria.add(Restrictions.eq("name", loginAccount));
+				List list=criteria.list();
+				System.out.println("999999999999999");
+				if ( list.size()<= 0) {
+					msg = "查無此帳號";
+				} else {
+					checkAccount = (Account) list.get(0);
+					if (checkAccount.getPassword().equals(password)) {
+						msg = "登入成功";
+						System.out.println("854628562");
+					}
+				}
+			} else {
+				msg = "帳號不可為空";
+			}
+		} catch (HibernateException e) {
+			msg = "發生錯誤 : " + new RuntimeException(e).toString();
+			// throw new RuntimeException(e);
+		} finally {
+			session.close();
+		}
+		return msg;
+	}
+	/*
+	 * 1. DetachedCriteria
+	 * criteria=DetachedCriteria.forClass(ObjectEntity.class);
+	 * 
+	 * criteria.add(Restrictions.eq("propertyName", propertyValue));
+	 * 
+	 * List result=getHibernateTemplate().findByCriteria(criteria);
+	 * 
+	 * 
+	 * 2. String hql = “from Street”;
+	 * 
+	 * Query query = session.createQuery(hql);
+	 * 
+	 * List<Street> list = query.list(); *
+	 */
+
+}

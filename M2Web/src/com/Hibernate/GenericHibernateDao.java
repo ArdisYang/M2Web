@@ -1,4 +1,4 @@
-//package com.intumit.orm.hibernate;
+//package com.Hibernate;
 //
 //import java.io.Serializable;
 //import java.lang.reflect.ParameterizedType;
