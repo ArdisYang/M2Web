@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.table.PositionType.PositionType.PositionType;
+
 @Entity
 @Table(name = "Personnel")
 public class Personnel {
@@ -17,9 +19,9 @@ public class Personnel {
 	private String account;// 帳號
 	private String name;
 	private String password;
-//	private int PositionTypeid;// 職務PositionTypeid
-	public String strPosition;
-	private int[] permissions;// 權限   如: 剛創建=0 最低  一般員工=1~3  會計(帳務操作)4   出納5
+	private int positionTypeid;// 職務PositionTypeid
+	//private PositionType positionType;
+	private int[] permissions;// 權限   如: 剛創建=0 最低  一般員工=1~3  會計(帳務操作)4   出納5 或是說 "角色" 會對應到開放的功能
 	private String nationality;// 國籍
 	private Date birthday;
 	private int gender;// 性別
@@ -70,13 +72,13 @@ public class Personnel {
 		this.password = password;
 	}
 
-//	public int getPositionTypeid() {
-//		return PositionTypeid;
-//	}
-//
-//	public void setPositionTypeid(int positionTypeid) {
-//		PositionTypeid = positionTypeid;
-//	}
+	public int getPositionTypeid() {
+		return positionTypeid;
+	}
+
+	public void setPositionTypeid(int positionTypeid) {
+		this.positionTypeid = positionTypeid;
+	}
 
 	public int[] getPermissions() {
 		return permissions;

@@ -2,8 +2,11 @@ package com.table.Personnel;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 
 import com.Hibernate.HibernateUtil;
 
@@ -44,14 +47,13 @@ public class PersonnelDAO extends HibernateUtil<Personnel> {
 		}
 		return list;
 	}
-	
+
 	public List<?> selectAll() {
 		Session session = null;
 		List<?> list = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			list = session.createSQLQuery(
-					"select * from Personnel p join PositionType pt on p.PositionTypeid =pt.id" )
+			list = session.createSQLQuery("select * from Personnel p join PositionType pt on p.PositionTypeid =pt.id")
 					.list();
 
 		} catch (HibernateException e) {
@@ -61,4 +63,24 @@ public class PersonnelDAO extends HibernateUtil<Personnel> {
 		}
 		return list;
 	}
+
+	//註冊用 
+	public boolean checkAccount(String createAccount) {
+		Session session = null;
+		List<?> list = null;
+		session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(Personnel.class); // 按类名查询
+		Criterion cn = Restrictions.eq("account", createAccount); // 每个Criterion对象表示一个查询条件
+		cr.add(cn); // 增加条件
+		List<Personnel> studs = cr.list(); // 查询的结果是已经封装好的
+		System.err.println(studs);
+		session.clear();
+		return false;
+	}
+
+	public String register() {
+		return null;
+
+	}
+
 }

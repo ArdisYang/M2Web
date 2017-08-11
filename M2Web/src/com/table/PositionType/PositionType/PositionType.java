@@ -13,8 +13,7 @@ public class PositionType {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private String position;
-	private int personnelId;
+	private String positionName;
 	private int hourlySalary;
 	private int monthlySalary;
 	private String note;// 備註
@@ -27,20 +26,12 @@ public class PositionType {
 		this.id = id;
 	}
 
-	public String getPosition() {
-		return position;
+	public String getPositionName() {
+		return positionName;
 	}
 
-	public void setPosition(String position) {
-		this.position = position;
-	}
-
-	public int getPersonnelId() {
-		return personnelId;
-	}
-
-	public void setPersonnelId(int personnelId) {
-		this.personnelId = personnelId;
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
 	}
 
 	public int getHourlySalary() {
@@ -66,4 +57,5 @@ public class PositionType {
 	public void setNote(String note) {
 		this.note = note;
 	}
+
 }
