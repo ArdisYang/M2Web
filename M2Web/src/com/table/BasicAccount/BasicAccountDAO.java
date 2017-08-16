@@ -1,4 +1,4 @@
-package com.table.Account;
+package com.table.BasicAccount;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import org.hibernate.criterion.Restrictions;
 
 import com.Hibernate.HibernateUtil;
 
-public class AccountDAO extends HibernateUtil<Account> {
+public class BasicAccountDAO extends HibernateUtil<BasicAccount> {
 
 	// public String login(Account loginAccount) {
 	// Session sess = null;
@@ -33,17 +33,17 @@ public class AccountDAO extends HibernateUtil<Account> {
 	public String login(String loginAccount, String password) {
 		Session session = null;
 		String msg = "";
-		Account checkAccount = new Account();
+		BasicAccount checkAccount = new BasicAccount();
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			Criteria criteria = session.createCriteria(Account.class);
+			Criteria criteria = session.createCriteria(BasicAccount.class);
 			if (loginAccount != null && !loginAccount.equals("")) {
 				criteria.add(Restrictions.eq("name", loginAccount));
 				List list = criteria.list();
 				if (list.size() <= 0) {
 					msg = "查無此帳號";
 				} else {
-					checkAccount = (Account) list.get(0);
+					checkAccount = (BasicAccount) list.get(0);
 					if (checkAccount.getPassword().equals(password)) {
 						msg = "登入成功";
 					} else {
@@ -67,7 +67,7 @@ public class AccountDAO extends HibernateUtil<Account> {
 		boolean checkRepeated = false;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			Criteria cr = session.createCriteria(Account.class); // 按类名查询
+			Criteria cr = session.createCriteria(BasicAccount.class); // 按类名查询
 			Criterion cn = Restrictions.eq("name", createAccount); // 每个Criterion对象表示一个查询条件
 			cr.add(cn); // 增加条件
 			if (cr.list().size() > 0) {// 查询的结果是已经封装好的

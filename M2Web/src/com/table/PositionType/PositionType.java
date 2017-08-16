@@ -1,5 +1,6 @@
-package com.table.PositionType.PositionType;
+package com.table.PositionType;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,12 +13,14 @@ public class PositionType {
 	/* 職位薪水參數 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="id")
 	private int id;
+	/*
 	private String positionName;
 	private int hourlySalary;
 	private int monthlySalary;
 	private String note;// 備註
-
+*/
 	public int getId() {
 		return id;
 	}
@@ -25,7 +28,7 @@ public class PositionType {
 	public void setId(int id) {
 		this.id = id;
 	}
-
+/*
 	public String getPositionName() {
 		return positionName;
 	}
@@ -57,5 +60,5 @@ public class PositionType {
 	public void setNote(String note) {
 		this.note = note;
 	}
-
+*/
 }

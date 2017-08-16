@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
@@ -31,21 +32,25 @@ public class PersonnelDAO extends HibernateUtil<Personnel> {
 		return login;
 	}
 
-	public List<?> selectByid(int id) {
+	public Personnel selectByid(int id) {
+		Personnel personnel=new Personnel();
 		Session session = null;
 		List<?> list;
+		String hql="select * from Personnel p join PositionType pt on p.PositionTypeid =pt.id where p.id= :id";
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			list = session.createSQLQuery(
-					"select * from Personnel p join PositionType pt on p.PositionTypeid =pt.id where p.id=" + id)
-					.list();
-
+			SQLQuery query = session.createSQLQuery(hql);
+			query.setParameter("id", 1);
+			list=query.list();
+			if(list.size()>0){
+				personnel=(Personnel) list.get(0);
+			}
 		} catch (HibernateException e) {
 			throw new RuntimeException(e);
 		} finally {
 			session.clear();
 		}
-		return list;
+		return personnel;
 	}
 
 	public List<?> selectAll() {

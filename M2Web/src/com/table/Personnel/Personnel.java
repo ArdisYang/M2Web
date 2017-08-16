@@ -2,26 +2,56 @@ package com.table.Personnel;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
+import javax.persistence.SecondaryTables;
 import javax.persistence.Table;
 
-import com.table.PositionType.PositionType.PositionType;
+import com.table.BasicAccount.BasicAccount;
+import com.table.PositionType.PositionType;
+
 
 @Entity
 @Table(name = "Personnel")
+// @SecondaryTable(name = "PositionType")
+// @SecondaryTables({
+// @SecondaryTable(name = "PositionType", pkJoinColumns = {
+// @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "positionTypeID")
+// }),
+// @SecondaryTable(name = "BasicAccount", pkJoinColumns = {
+// @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "basicAccountID")
+// }) })
 public class Personnel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private int id;
-	private String account;// 帳號
+	
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "positionType_id")
+	private PositionType positionType;
+//	@Column(name = "positionTypeID")
+//	private int positionTypeID; // 職務PositionTypeid
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private BasicAccount basicAccount;// 帳號
+	
+//	@Column(name = "basicAccountID")
+//	private int basicAccountID;
+	
 	private String name;
-	private String password;
-	private int positionTypeid;// 職務PositionTypeid
-	//private PositionType positionType;
-	private int[] permissions;// 權限   如: 剛創建=0 最低  一般員工=1~3  會計(帳務操作)4   出納5 或是說 "角色" 會對應到開放的功能
+	private int[] permissions;// 權限 如: 剛創建=0 最低 一般員工=1~3 會計(帳務操作)4 出納5 或是說 "角色"
+								// 會對應到開放的功能
 	private String nationality;// 國籍
 	private Date birthday;
 	private int gender;// 性別
@@ -48,13 +78,21 @@ public class Personnel {
 		this.id = id;
 	}
 
-	public String getAccount() {
-		return account;
+	public BasicAccount getBasicAccount() {
+		return basicAccount;
 	}
 
-	public void setAccount(String account) {
-		this.account = account;
+	public void setBasicAccount(BasicAccount basicAccount) {
+		this.basicAccount = basicAccount;
 	}
+
+//	public int getBasicAccountID() {
+//		return basicAccountID;
+//	}
+//
+//	public void setBasicAccountID(int basicAccountID) {
+//		this.basicAccountID = basicAccountID;
+//	}
 
 	public String getName() {
 		return name;
@@ -64,21 +102,21 @@ public class Personnel {
 		this.name = name;
 	}
 
-	public String getPassword() {
-		return password;
+	public PositionType getPositionType() {
+		return positionType;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPositionType(PositionType positionType) {
+		this.positionType = positionType;
 	}
 
-	public int getPositionTypeid() {
-		return positionTypeid;
-	}
-
-	public void setPositionTypeid(int positionTypeid) {
-		this.positionTypeid = positionTypeid;
-	}
+//	public int getPositionTypeID() {
+//		return positionTypeID;
+//	}
+//
+//	public void setPositionTypeID(int positionTypeID) {
+//		this.positionTypeID = positionTypeID;
+//	}
 
 	public int[] getPermissions() {
 		return permissions;

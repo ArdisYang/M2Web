@@ -1,4 +1,4 @@
-package com.table.PositionType.PositionType;
+package com.table.PositionType;
 
 import com.Hibernate.HibernateUtil;
 

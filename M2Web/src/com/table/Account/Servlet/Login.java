@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.table.Account.Account;
-import com.table.Account.AccountDAO;
+import com.table.BasicAccount.BasicAccount;
+import com.table.BasicAccount.BasicAccountDAO;
 
 /**
  * Servlet implementation class Login
@@ -50,12 +50,12 @@ public class Login extends HttpServlet {
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Account account = new Account();
+		BasicAccount account = new BasicAccount();
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
 		if (name != null && !name.equals("") && password != null && !password.equals("")) {
 		
-			AccountDAO accountDAO=new AccountDAO();
+			BasicAccountDAO accountDAO=new BasicAccountDAO();
 			accountDAO.login(name, password);
 		}
 
