@@ -17,12 +17,12 @@ public class Main {
 		LeoTest leo = new LeoTest();
 		LeoTestDAO leoTestDAO = new LeoTestDAO();
 
-		for (int i = 0; i < 300000; i++) {
-			System.out.println(i);
-			leo.setPrice(i);
-			leo.setProduct("產品 : " + i);
+//		for (int i = 0; i < 300000; i++) {
+//			System.out.println(i);
+			leo.setPrice(3002);
+			leo.setProduct("產品 : ");
 			leoTestDAO.save(leo);
-		}
+//		}
 		System.out.println("完畢");
 		// for (int i = 1; i < 9; i++) {
 		// Account account = new Account();
